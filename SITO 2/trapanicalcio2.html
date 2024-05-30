@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acquista Biglietti - Trapani Calcio</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        header {
+            background-color: #800000;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            animation: slideDown 1s ease-in-out;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            animation: slideDown 1s ease-in-out;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+            animation: slideDown 1s ease-in-out;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #800000;
+        }
+
+        button {
+            background-color: #800000;
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #660000;
+        }
+
+        .message {
+            display: none;
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .success {
+            border-color: #d4edda;
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            border-color: #f8d7da;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Acquista Biglietti - Trapani Calcio</h1>
+</header>
+
+<nav>
+    <a href="Trapanicalcio.html">Home</a>
+    <a href="trapanicalcio2.html">Acquista Biglietti</a>
+    <a href="trapanicalcio3.html">Giocatori</a>
+    <a href="#contatti">Contatti</a>
+</nav>
+
+<div class="container">
+    <h2>Modulo di Acquisto Biglietti</h2>
+    <div class="message" id="message"></div>
+    <form id="ticketForm">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" required>
+
+        
+        <label for="cognome">Cognome</label>
+        <input type="text" id="cognome" name="cognome" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="telefono">Telefono</label>
+        <input type="tel" id="telefono" name="telefono" required>
+
+        <label for="settore">Seleziona Settore</label>
+        <select id="settore" name="partita" required>
+        <option value="settore">Seleziona settore</option>
+
+            <option value="settore1">Tribuna laterale</option>
+            <option value="settore2">Tribuna Centrale</option>
+            <option value="settore3">Gradinata</option>
+            <option value="settore4">Curva Nord</option>
+            <option value="settore5">Curva Ospiti</option>
+
+            
+        </select>
+
+        <label for="quantita">Quantità Biglietti</label>
+        <input type="number" id="quantita" name="quantita" min="1" max="10" required>
+
+        <button type="submit">Acquista</button>
+    </form>
+</div>
+
+
+<script>
+    document.getElementById('ticketForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const messageDiv = document.getElementById('message');
+        messageDiv.classList.remove('success', 'error');
+
+        const nome = document.getElementById('nome').value;
+        const cognome = document.getElementById('cognome').value;
+        const email = document.getElementById('email').value;
+        const telefono = document.getElementById('telefono').value;
+        const partita = document.getElementById('settore').value;
+        const quantita = document.getElementById('quantita').value;
+
+        if (nome && cognome && email && telefono && partita && quantita) {
+            messageDiv.classList.add('success');
+            messageDiv.innerHTML = 'Acquisto effettuato con successo!';
+            document.getElementById('ticketForm').reset(); // Reset del form
+            setTimeout(function() {
+                window.location.href = 'Trapanicalcio.html'; // Reindirizzamento alla home dopo 3 secondi
+            }, 3000);
+        } else {
+            messageDiv.classList.add('error');
+            messageDiv.innerHTML = 'Errore nell\'acquisto. Per favore, verifica i dati inseriti.';
+        }
+        
+        messageDiv.style.display = 'block';
+    });
+</script>
+
+</body>
+</html>
